@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+<h2>Bienvenido al Sistema de Reservas</h2>
+<p>Gestiona clientes, habitaciones y reservas de tu hotel.</p>
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem;">
+    <div style="border: 1px solid #ddd; padding: 1rem; text-align: center;">
+        <h3>Clientes</h3>
+        <p>Total: {{ clientes_count }}</p>
+        <a href="{% url 'clientes' %}"><button>Ver Clientes</button></a>
+    </div>
+    <div style="border: 1px solid #ddd; padding: 1rem; text-align: center;">
+        <h3>Habitaciones</h3>
+        <p>Total: {{ habitaciones_count }}</p>
+        <a href="{% url 'habitaciones' %}"><button>Ver Habitaciones</button></a>
+    </div>
+    <div style="border: 1px solid #ddd; padding: 1rem; text-align: center;">
+        <h3>Reservas</h3>
+        <p>Total: {{ reservas_count }}</p>
+        <a href="{% url 'reservas' %}"><button>Ver Reservas</button></a>
+    </div>
+</div>
+{% endblock %}

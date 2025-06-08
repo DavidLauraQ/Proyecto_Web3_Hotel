@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sistema de Reservas</title>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'inicio' %}">Inicio</a>
+        <a href="{% url 'clientes' %}">Clientes</a>
+        <a href="{% url 'habitaciones' %}">Habitaciones</a>
+        <a href="{% url 'reservas' %}">Reservas</a>
+    </nav>
+    
+    {% block content %}{% endblock %}
+</body>
+</html>

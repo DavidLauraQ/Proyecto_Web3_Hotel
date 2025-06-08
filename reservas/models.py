@@ -8,7 +8,7 @@ class Cliente(models.Model):
     email = models.EmailField(unique=True)
     telefono = models.CharField(max_length=20, blank=True, null=True)
 
-    def __str__(self):
+    def _str_(self):
         return f"{self.nombre} {self.apellido}"
 
 class TipoHabitacion(models.Model):
@@ -17,7 +17,7 @@ class TipoHabitacion(models.Model):
     descripcion = models.TextField(blank=True, null=True)
     precio_noche = models.DecimalField(max_digits=10, decimal_places=2)
 
-    def __str__(self):
+    def _str_(self):
         return self.nombre_tipo
 
 class Habitacion(models.Model):
@@ -36,7 +36,7 @@ class Habitacion(models.Model):
         default='disponible'
     )
 
-    def __str__(self):
+    def _str_(self):
         return f"Habitación {self.numero_habitacion} ({self.tipo_habitacion.nombre_tipo})"
 
 class Reserva(models.Model):
@@ -56,5 +56,5 @@ class Reserva(models.Model):
         default='pendiente'
     )
 
-    def __str__(self):
+    def _str_(self):
         return f"Reserva {self.id_reserva} para {self.cliente.nombre} en Habitación {self.habitacion.numero_habitacion}"

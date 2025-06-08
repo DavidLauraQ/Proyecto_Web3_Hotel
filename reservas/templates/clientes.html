@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Clientes{% endblock %}
+
+{% block content %}
+<h2>Lista de Clientes</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for cliente in clientes %}
+        <tr>
+            <td>{{ cliente.nombre }}</td>
+            <td>{{ cliente.email }}</td>
+            <td>
+                <a href="#"><button>Editar</button></a>
+                <a href="#"><button style="background: #c00;">Eliminar</button></a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">No hay clientes registrados</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div style="margin-top: 1rem;">
+    <a href="#"><button>+ Añadir Cliente</button></a>
+</div>
+{% endblock %}
