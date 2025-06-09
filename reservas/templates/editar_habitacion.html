@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Editar Habitación{% endblock %}
+
+{% block content %}
+<h2>Editar Habitación</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Guardar Cambios</button>
+    <a href="{% url 'habitaciones' %}"><button type="button">Cancelar</button></a>
+</form>
+{% endblock %}

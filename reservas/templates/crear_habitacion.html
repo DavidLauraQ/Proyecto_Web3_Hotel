@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Nueva Habitación{% endblock %}
+
+{% block content %}
+<h2>Nueva Habitación</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">Guardar Habitación</button>
+    <a href="{% url 'habitaciones' %}"><button type="button">Cancelar</button></a>
+</form>
+{% endblock %}

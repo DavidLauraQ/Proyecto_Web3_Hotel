@@ -44,11 +44,21 @@ class ReservaForm(forms.ModelForm):
         widgets = {
             'cliente': forms.Select(attrs={'class': 'form-control'}),
             'habitacion': forms.Select(attrs={'class': 'form-control'}),
+            # Cambiar 'type': 'date' por 'text' para controlar formato con input_formats
             'fecha_inicio': forms.DateInput(
-                attrs={'class': 'form-control', 'type': 'date'}),
+                format='%m/%d/%Y',
+                attrs={'class': 'form-control', 'placeholder': 'MM/DD/YYYY', 'type': 'text'}
+            ),
             'fecha_fin': forms.DateInput(
-                attrs={'class': 'form-control', 'type': 'date'}),
+                format='%m/%d/%Y',
+                attrs={'class': 'form-control', 'placeholder': 'MM/DD/YYYY', 'type': 'text'}
+            ),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['fecha_inicio'].input_formats = ['%m/%d/%Y']
+        self.fields['fecha_fin'].input_formats = ['%m/%d/%Y']
 
     def clean(self):
         cleaned_data = super().clean()

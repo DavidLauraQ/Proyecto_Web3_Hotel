@@ -15,11 +15,11 @@
     <tbody>
         {% for cliente in clientes %}
         <tr>
-            <td>{{ cliente.nombre }}</td>
+            <td>{{ cliente.nombre }} {{ cliente.apellido }}</td>
             <td>{{ cliente.email }}</td>
             <td>
-                <a href="#"><button>Editar</button></a>
-                <a href="#"><button style="background: #c00;">Eliminar</button></a>
+                <a href="{% url 'editar_cliente' cliente.id_cliente %}"><button>Editar</button></a>
+                <a href="{% url 'eliminar_cliente' cliente.id_cliente %}"><button style="background: #c00;">Eliminar</button></a>
             </td>
         </tr>
         {% empty %}
@@ -30,6 +30,6 @@
     </tbody>
 </table>
 <div style="margin-top: 1rem;">
-    <a href="#"><button>+ Añadir Cliente</button></a>
+    <a href="{% url 'crear_cliente' %}"><button>+ Añadir Cliente</button></a>
 </div>
 {% endblock %}

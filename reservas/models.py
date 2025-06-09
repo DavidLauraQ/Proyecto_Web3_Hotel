@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from django.db import models
+
 class Cliente(models.Model):
     id_cliente = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=100)
@@ -8,8 +10,9 @@ class Cliente(models.Model):
     email = models.EmailField(unique=True)
     telefono = models.CharField(max_length=20, blank=True, null=True)
 
-    def _str_(self):
+    def __str__(self):
         return f"{self.nombre} {self.apellido}"
+
 
 class TipoHabitacion(models.Model):
     id_tipo_habitacion = models.AutoField(primary_key=True)
@@ -17,13 +20,14 @@ class TipoHabitacion(models.Model):
     descripcion = models.TextField(blank=True, null=True)
     precio_noche = models.DecimalField(max_digits=10, decimal_places=2)
 
-    def _str_(self):
+    def __str__(self):
         return self.nombre_tipo
 
+
 class Habitacion(models.Model):
-    id_habitacion = models.AutoField(primary_key=True)
+    id_habitacion = models.AutoField(primary_key=True)  # Añadí el id porque parece necesario
     numero_habitacion = models.CharField(max_length=10, unique=True)
-    tipo_habitacion = models.ForeignKey(TipoHabitacion, on_delete=models.CASCADE, db_column='id_tipo_habitacion')
+    tipo_habitacion = models.ForeignKey(TipoHabitacion, on_delete=models.CASCADE)
     capacidad = models.IntegerField()
     estado = models.CharField(
         max_length=20,
@@ -36,8 +40,9 @@ class Habitacion(models.Model):
         default='disponible'
     )
 
-    def _str_(self):
+    def __str__(self):
         return f"Habitación {self.numero_habitacion} ({self.tipo_habitacion.nombre_tipo})"
+
 
 class Reserva(models.Model):
     id_reserva = models.AutoField(primary_key=True)
@@ -56,5 +61,5 @@ class Reserva(models.Model):
         default='pendiente'
     )
 
-    def _str_(self):
-        return f"Reserva {self.id_reserva} para {self.cliente.nombre} en Habitación {self.habitacion.numero_habitacion}"
+    def __str__(self):
+        return f"Reserva {self.id_reserva} - {self.cliente} en {self.habitacion}"
