@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Añadir Cliente{% endblock %}
+
+{% block content %}
+<h2>Añadir Cliente</h2>
+
+<form method="post" novalidate>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Guardar</button>
+    <a href="{% url 'lista_clientes' %}"><button type="button">Cancelar</button></a>
+</form>
+{% endblock %}

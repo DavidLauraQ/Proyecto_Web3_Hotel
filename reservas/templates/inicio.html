@@ -4,12 +4,13 @@
 
 {% block content %}
 <h2>Bienvenido al Sistema de Reservas</h2>
+
 <p>Gestiona clientes, habitaciones y reservas de tu hotel.</p>
 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem;">
     <div style="border: 1px solid #ddd; padding: 1rem; text-align: center;">
         <h3>Clientes</h3>
         <p>Total: {{ clientes_count }}</p>
-        <a href="{% url 'clientes' %}"><button>Ver Clientes</button></a>
+        <a href="{% url 'lista_clientes' %}"><button>Ver Clientes</button></a>
     </div>
     <div style="border: 1px solid #ddd; padding: 1rem; text-align: center;">
         <h3>Habitaciones</h3>
@@ -22,4 +23,7 @@
         <a href="{% url 'reservas' %}"><button>Ver Reservas</button></a>
     </div>
 </div>
+<footer>
+    <p>&copy; 2025 Hotel Reservas. Todos los derechos reservados.</p>
+</footer>
 {% endblock %}

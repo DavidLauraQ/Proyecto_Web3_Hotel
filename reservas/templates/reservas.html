@@ -1,39 +1,51 @@
 {% extends 'base.html' %}
 
-{% block title %}Reservas{% endblock %}
+{% block title %}
+    Reservas
+{% endblock %}
 
 {% block content %}
-<h2>Lista de Reservas</h2>
-<table>
-    <thead>
-        <tr>
-            <th>Cliente</th>
-            <th>Habitación</th>
-            <th>Fecha Inicio</th>
-            <th>Fecha Fin</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for reserva in reservas %}
-        <tr>
-            <td>{{ reserva.cliente.nombre }}</td>
-            <td>{{ reserva.habitacion.numero }}</td>
-            <td>{{ reserva.fecha_inicio }}</td>
-            <td>{{ reserva.fecha_fin }}</td>
-            <td>
-                <a href="#"><button>Editar</button></a>
-                <a href="#"><button style="background: #c00;">Cancelar</button></a>
-            </td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td colspan="5">No hay reservas registradas</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-<div style="margin-top: 1rem;">
-    <a href="{% url 'reservar' %}"><button>+ Nueva Reserva</button></a>
-</div>
+    <h2>Lista de Reservas</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Cliente</th>
+                <th>Habitación</th>
+                <th>Fecha Inicio</th>
+                <th>Fecha Fin</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reserva in reservas %}
+                <tr>
+                    <td>{{ reserva.cliente.nombre }}</td>
+                    <td>{{ reserva.habitacion.numero_habitacion }}</td>
+                    <td>{{ reserva.fecha_inicio }}</td>
+                    <td>{{ reserva.fecha_fin }}</td>
+                    <td>
+                        <a href="{% url 'editar_reserva' reserva.id_reserva %}">
+                            <button>Editar</button>
+                        </a>
+                        {# ✅ Cambio de 'cancelar_reserva' a 'eliminar_reserva' #}
+                        <a href="{% url 'eliminar_reserva' reserva.id_reserva %}">
+                             {# ✅ Cambio del texto del botón #}
+                            <button style="background: #c00;">Eliminar</button>
+                        </a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5">No hay reservas registradas</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div style="margin-top: 1rem;">
+        <a href="{% url 'reservar' %}">
+            <button>+ Nueva Reserva</button>
+        </a>
+    </div>
 {% endblock %}

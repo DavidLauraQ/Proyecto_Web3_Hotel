@@ -16,13 +16,16 @@
     </thead>
     <tbody>
         {% for habitacion in habitaciones %}
+
         <tr>
-            <td>{{ habitacion.numero }}</td>
-            <td>{{ habitacion.tipo }}</td>
-            <td>${{ habitacion.precio }}</td>
+            <td>{{ habitacion.numero_habitacion }}</td>
+            <td>{{ habitacion.tipo_habitacion.nombre_tipo }}</td>
+            <td>${{ habitacion.tipo_habitacion.precio_noche }}</td>
             <td>{{ habitacion.get_estado_display }}</td>
             <td>
-                <a href="#"><button>Editar</button></a>
+                <a href="{% url 'editar_habitacion' habitacion.id_habitacion %}"><button>Editar</button></a>
+                <a href="{% url 'eliminar_habitacion' habitacion.id_habitacion %}"><button style="background-color: #c00;">Eliminar</button></a>
+
             </td>
         </tr>
         {% empty %}
@@ -32,4 +35,11 @@
         {% endfor %}
     </tbody>
 </table>
+
+<div style="margin-top: 1rem;">
+    <a href="{% url 'crear_habitacion' %}">
+        <button>+ Nueva Habitación</button>
+    </a>
+</div>
+
 {% endblock %}

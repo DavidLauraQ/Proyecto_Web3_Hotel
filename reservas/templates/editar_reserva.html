@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Editar Reserva{% endblock %}
+
+{% block content %}
+<h2>Editar Reserva</h2>
+
+<form method="post">
+    {% csrf_token %}
+    
+    <div>
+        <label>Cliente:</label>
+        {{ form.cliente }}
+        {% if form.cliente.errors %}
+            <div>{{ form.cliente.errors }}</div>
+        {% endif %}
+    </div>
+    
+    <div>
+        <label>Habitación:</label>
+        {{ form.habitacion }}
+        <small>Actual: {{ reserva.habitacion.numero }} ({{ reserva.habitacion.tipo_habitacion }})</small>
+        {% if form.habitacion.errors %}
+            <div>{{ form.habitacion.errors }}</div>
+        {% endif %}
+    </div>
+    
+    <div>
+        <div>
+            <label>Fecha de Inicio:</label>
+            {{ form.fecha_inicio }}
+            {% if form.fecha_inicio.errors %}
+                <div>{{ form.fecha_inicio.errors }}</div>
+            {% endif %}
+        </div>
+        
+        <div>
+            <label>Fecha de Fin:</label>
+            {{ form.fecha_fin }}
+            {% if form.fecha_fin.errors %}
+                <div>{{ form.fecha_fin.errors }}</div>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div>
+        <label>Estado:</label>
+        {{ form.estado_reserva }}
+        {% if form.estado_reserva.errors %}
+            <div>{{ form.estado_reserva.errors }}</div>
+        {% endif %}
+    </div>
+    
+    <div>
+        <button type="submit">Guardar Cambios</button>
+        <a href="{% url 'reservas' %}">Cancelar</a>
+    </div>
+</form>
+{% endblock %}
