@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Inicio</h2>
+    
+    {% if user.is_authenticated %}
+        <h3>{{user.username}} BIENVENIDO!!!</h3>
+    {% else %}
+        BIENVENIDO , ESTE CAMPO ES PARA Habitaciones
+    {% endif %}
+        
+
+{% endblock  %}
