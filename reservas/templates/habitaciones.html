@@ -11,31 +11,34 @@
             <th>Tipo</th>
             <th>Precio/Noche</th>
             <th>Estado</th>
+            {% if request.user.is_staff %}
             <th>Acciones</th>
+            {% endif %}
         </tr>
     </thead>
     <tbody>
         {% for habitacion in habitaciones %}
-
         <tr>
             <td>{{ habitacion.numero_habitacion }}</td>
             <td>{{ habitacion.tipo_habitacion.nombre_tipo }}</td>
             <td>${{ habitacion.tipo_habitacion.precio_noche }}</td>
             <td>{{ habitacion.get_estado_display }}</td>
+            {% if request.user.is_staff %}
             <td>
                 <a href="{% url 'editar_habitacion' habitacion.id_habitacion %}"><button>Editar</button></a>
                 <a href="{% url 'eliminar_habitacion' habitacion.id_habitacion %}"><button style="background-color: #c00;">Eliminar</button></a>
-
             </td>
+            {% endif %}
         </tr>
         {% empty %}
         <tr>
-            <td colspan="5">No hay habitaciones registradas</td>
+            <td colspan="{% if request.user.is_staff %}5{% else %}4{% endif %}">No hay habitaciones registradas</td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
-{% if request.user.is_authenticated %}
+
+{% if request.user.is_authenticated and request.user.is_staff %}
 <div style="margin-top: 1rem;">
     <a href="{% url 'crear_habitacion' %}">
         <button>+ Nueva Habitación</button>

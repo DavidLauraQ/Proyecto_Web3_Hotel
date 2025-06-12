@@ -4,6 +4,15 @@
 
 {% block content %}
 <h2>{% if reserva %}Editar{% else %}Nueva{% endif %} Reserva</h2>
+
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
 <form method="post">
     {% csrf_token %}
     <div class="form-group">
@@ -22,8 +31,8 @@
         <label for="id_fecha_fin">Fecha de Salida:</label>
         {{ form.fecha_fin }}
     </div>
-    
+
     <button type="submit">Guardar Reserva</button>
-    <a href="{% url 'reservas' %}"><button type="button">Cancelar</button></a>
+    <a href="{% url 'reservas' %}">Cancelar</a>
 </form>
 {% endblock %}

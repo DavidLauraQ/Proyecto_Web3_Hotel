@@ -14,7 +14,9 @@
                 <th>Habitación</th>
                 <th>Fecha Inicio</th>
                 <th>Fecha Fin</th>
-                <th>Acciones</th>
+                {% if request.user.is_staff %}
+                    <th>Acciones</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -24,28 +26,32 @@
                     <td>{{ reserva.habitacion.numero_habitacion }}</td>
                     <td>{{ reserva.fecha_inicio }}</td>
                     <td>{{ reserva.fecha_fin }}</td>
-                    <td>
-                        <a href="{% url 'editar_reserva' reserva.id_reserva %}">
-                            <button>Editar</button>
-                        </a>
-                        {# ✅ Cambio de 'cancelar_reserva' a 'eliminar_reserva' #}
-                        <a href="{% url 'eliminar_reserva' reserva.id_reserva %}">
-                             {# ✅ Cambio del texto del botón #}
-                            <button style="background: #c00;">Eliminar</button>
-                        </a>
-                    </td>
+                    {% if request.user.is_staff %}
+                        <td>
+                            <a href="{% url 'editar_reserva' reserva.id_reserva %}">
+                                <button>Editar</button>
+                            </a>
+                            <a href="{% url 'eliminar_reserva' reserva.id_reserva %}">
+                                <button style="background: #c00;">Eliminar</button>
+                            </a>
+                        </td>
+                    {% endif %}
                 </tr>
             {% empty %}
                 <tr>
-                    <td colspan="5">No hay reservas registradas</td>
+                    <td colspan="{% if request.user.is_staff %}5{% else %}4{% endif %}">
+                        No hay reservas registradas
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 
+    {% if request.user.is_authenticated %}
     <div style="margin-top: 1rem;">
         <a href="{% url 'reservar' %}">
             <button>+ Nueva Reserva</button>
         </a>
     </div>
+    {% endif %}
 {% endblock %}
