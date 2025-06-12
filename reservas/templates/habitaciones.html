@@ -35,11 +35,11 @@
         {% endfor %}
     </tbody>
 </table>
-
+{% if request.user.is_authenticated %}
 <div style="margin-top: 1rem;">
     <a href="{% url 'crear_habitacion' %}">
         <button>+ Nueva Habitación</button>
     </a>
 </div>
-
+{% endif %}
 {% endblock %}
