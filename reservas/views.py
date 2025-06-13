@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Cliente, Habitacion, Reserva
-from .forms import ReservaForm, HabitacionForm, ClienteForm
+from .models import Cliente, Habitacion, Reserva, TipoHabitacion
+from .forms import ReservaForm, HabitacionForm, ClienteForm, TipoHabitacionForm
 from .forms import RegistroUsuarioForm
 from .models import Cliente
 from django.contrib import messages
@@ -82,6 +82,19 @@ def eliminar_cliente(request, pk):
         cliente.delete()
         return redirect('lista_clientes')
     return render(request, 'eliminar_cliente.html', {'cliente': cliente})
+
+# TIPO HABITACIONES
+@login_required
+@user_passes_test(es_admin)
+def crear_tipohabitacion(request):
+    if request.method == 'POST':
+        form = TipoHabitacionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('habitaciones')
+    else:
+        form = TipoHabitacionForm()
+    return render(request, 'crear_tipohabitacion.html', {'form': form})
 
 # HABITACIONES
 @login_required

@@ -17,6 +17,8 @@ urlpatterns = [
     path('habitaciones/nueva/', views.crear_habitacion, name='crear_habitacion'),
     path('habitaciones/editar/<int:pk>/', views.editar_habitacion, name='editar_habitacion'),
     path('habitaciones/eliminar/<int:pk>/', views.eliminar_habitacion, name='eliminar_habitacion'),
+    #
+    path('habitaciones/nuevotipo/', views.crear_tipohabitacion, name='crear_tipohabitacion'),
 
     # Reservas
     path('reservas/', views.lista_reservas, name='reservas'),

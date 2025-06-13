@@ -13,6 +13,8 @@
             <th>Estado</th>
             {% if request.user.is_staff %}
             <th>Acciones</th>
+            {% else %}
+            <th>Descripcion</th>
             {% endif %}
         </tr>
     </thead>
@@ -28,6 +30,8 @@
                 <a href="{% url 'editar_habitacion' habitacion.id_habitacion %}"><button>Editar</button></a>
                 <a href="{% url 'eliminar_habitacion' habitacion.id_habitacion %}"><button style="background-color: #c00;">Eliminar</button></a>
             </td>
+            {% else %}
+            <td>{{ habitacion.tipo_habitacion.descripcion }}</td>
             {% endif %}
         </tr>
         {% empty %}
@@ -39,10 +43,18 @@
 </table>
 
 {% if request.user.is_authenticated and request.user.is_staff %}
-<div style="margin-top: 1rem;">
-    <a href="{% url 'crear_habitacion' %}">
-        <button>+ Nueva Habitación</button>
-    </a>
+<!-- Temporal los div hasta que el marco lo arregle -->
+<div style="margin-top: 1rem; display: flex; "> <!-- justify-content: space-around -->
+    <div>
+        <a href="{% url 'crear_tipohabitacion' %}">
+            <button>+ Nuevo tipo de habitacion</button>
+        </a>
+    </div>
+    <div>
+        <a href="{% url 'crear_habitacion' %}">
+            <button>+ Nueva Habitación</button>
+        </a>
+    </div>
 </div>
 {% endif %}
 {% endblock %}

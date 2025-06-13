@@ -26,6 +26,18 @@ class ClienteForm(forms.ModelForm):
             'telefono': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
+#
+class TipoHabitacionForm(forms.ModelForm):
+    class Meta:
+        model = TipoHabitacion
+        fields = ['nombre_tipo', 'descripcion', 'precio_noche']
+        widgets = {
+            'nombre_tipo': forms.TextInput(attrs={'class': 'form-control'}),
+            'descripcion': forms.Textarea(attrs={'class': 'form-control', 'rows': 4}),
+            'precio_noche': forms.NumberInput(attrs={'class': 'form-control'}),
+        }
+#
+        
 class HabitacionForm(forms.ModelForm):
     class Meta:
         model = Habitacion
