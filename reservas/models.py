@@ -1,7 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User
-
-from django.db import models
 
 class Cliente(models.Model):
     id_cliente = models.AutoField(primary_key=True)
@@ -25,29 +22,24 @@ class TipoHabitacion(models.Model):
 
 
 class Habitacion(models.Model):
-    id_habitacion = models.AutoField(primary_key=True)  # Añadí el id porque parece necesario
-    numero_habitacion = models.CharField(max_length=10, unique=True)
+    id = models.AutoField(primary_key=True)  # Opcional, Django lo crea automáticamente
+    numero_habitacion = models.CharField(max_length=10)
     tipo_habitacion = models.ForeignKey(TipoHabitacion, on_delete=models.CASCADE)
     capacidad = models.IntegerField()
     estado = models.CharField(
-        max_length=20,
-        choices=[
-            ('disponible', 'Disponible'),
-            ('ocupada', 'Ocupada'),
-            ('mantenimiento', 'En Mantenimiento'),
-            ('limpieza', 'En Limpieza'),
-        ],
-        default='disponible'
+        max_length=1, 
+        choices=[('D','Disponible'), ('O','Ocupada'), ('M','Mantenimiento')], 
+        default='D'
     )
 
     def __str__(self):
-        return f"Habitación {self.numero_habitacion} ({self.tipo_habitacion.nombre_tipo})"
+        return f"Habitación {self.numero_habitacion}"
 
 
 class Reserva(models.Model):
     id_reserva = models.AutoField(primary_key=True)
-    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, db_column='id_cliente')
-    habitacion = models.ForeignKey(Habitacion, on_delete=models.CASCADE, db_column='id_habitacion')
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)  # Quitar db_column para evitar problemas
+    habitacion = models.ForeignKey(Habitacion, on_delete=models.CASCADE)  # Igual aquí
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
     estado_reserva = models.CharField(

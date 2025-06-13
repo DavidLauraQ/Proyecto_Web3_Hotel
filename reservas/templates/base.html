@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sistema de Reservas</title>
+    <title>{% block title %}Sistema de Reservas{% endblock %}</title>
+
 </head>
 <body>
     <nav>
@@ -14,13 +15,21 @@
             <a href="{% url 'reservas' %}">Reservas</a>
             <a href="{% url 'logout' %}">Salir</a>
         {% else %}
-            <li><a href="{% url 'login' %}">Ingresar</a></li>
-            <li><a href="{% url 'registrar' %}">Registrarse</a></li>
+            <a href="{% url 'login' %}">Ingresar</a>
+            <a href="{% url 'registrar' %}">Registrarse</a>
         {% endif %}
     </nav>
-    
+
+    {# Bloque global para mensajes #}
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
     {% block content %}
-    
     {% endblock %}
 </body>
 </html>
