@@ -10,6 +10,6 @@
 <form method="post">
     {% csrf_token %}
     <button type="submit" style="background-color: #c00; color: white;">Eliminar</button>
-    <a href="{% url 'lista_clientes' %}"><button type="button">Cancelar</button></a>
+    <a href="{% url 'clientes' %}"><button type="button">Cancelar</button></a>
 </form>
 {% endblock %}

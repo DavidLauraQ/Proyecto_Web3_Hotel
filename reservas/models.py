@@ -22,7 +22,7 @@ class TipoHabitacion(models.Model):
 
 
 class Habitacion(models.Model):
-    id = models.AutoField(primary_key=True)  # Opcional, Django lo crea automáticamente
+    id_habitacion = models.AutoField(primary_key=True)  # Opcional, Django lo crea automáticamente
     numero_habitacion = models.CharField(max_length=10)
     tipo_habitacion = models.ForeignKey(TipoHabitacion, on_delete=models.CASCADE)
     capacidad = models.IntegerField()
