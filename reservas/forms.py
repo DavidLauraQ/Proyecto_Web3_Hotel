@@ -68,19 +68,19 @@ class ReservaForm(forms.ModelForm):
             'cliente': forms.Select(attrs={'class': 'form-control'}),
             'habitacion': forms.Select(attrs={'class': 'form-control'}),
             'fecha_inicio': forms.DateInput(
-                format='%m/%d/%Y',
-                attrs={'class': 'form-control', 'placeholder': 'MM/DD/YYYY', 'type': 'text'}
+                format='%d/%m/%Y',
+                attrs={'class': 'form-control', 'placeholder': 'DIA/MES/AÑO', 'type': 'text'}
             ),
             'fecha_fin': forms.DateInput(
-                format='%m/%d/%Y',
-                attrs={'class': 'form-control', 'placeholder': 'MM/DD/YYYY', 'type': 'text'}
+                format='%d/%m/%Y',
+                attrs={'class': 'form-control', 'placeholder': 'DIA/MES/AÑO', 'type': 'text'}
             ),
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['fecha_inicio'].input_formats = ['%m/%d/%Y']
-        self.fields['fecha_fin'].input_formats = ['%m/%d/%Y']
+        self.fields['fecha_inicio'].input_formats = ['%d/%m/%Y']
+        self.fields['fecha_fin'].input_formats = ['%d/%m/%Y']
 
     def clean(self):
         cleaned_data = super().clean()
