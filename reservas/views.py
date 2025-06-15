@@ -90,7 +90,9 @@ def crear_tipohabitacion(request):
     if request.method == 'POST':
         form = TipoHabitacionForm(request.POST)
         if form.is_valid():
-            form.save()
+            tipo_habitacion = form.save(commit=False)  # Mantengo tu nombre de variable
+            tipo_habitacion.imagen = form.cleaned_data.get('imagen')
+            tipo_habitacion.save()
             return redirect('habitaciones')
     else:
         form = TipoHabitacionForm()
@@ -143,6 +145,7 @@ def lista_reservas(request):
 
 @login_required
 def crear_reserva(request):
+    habitaciones = Habitacion.objects.all()
     if request.method == 'POST':
         form = ReservaForm(request.POST)
         if form.is_valid():
@@ -172,7 +175,8 @@ def crear_reserva(request):
             return redirect('reservas')
     else:
         form = ReservaForm()
-    return render(request, 'reservar.html', {'form': form})
+    return render(request, 'reservar.html', {'form': form, 'habitaciones': habitaciones})
+
 @login_required
 @user_passes_test(es_admin)
 def editar_reserva(request, pk):

@@ -51,9 +51,22 @@
 
     <!-- Columna derecha: imagen + texto -->
     <div class="reserva-info">
-        <img src="{% static 'img/fcpn.jpg' %}" alt="Hotel" class="reserva-imagen">
-        <h3>Tu estancia perfecta</h3>
-        <p>Reserva con nosotros y disfruta de una experiencia inolvidable en nuestras habitaciones cómodas y elegantes.</p>
+        {% for habitacion in habitaciones %}
+          <table>
+            <tr>
+              <td rowspan="2">
+                <img src="{% static 'img/fcpn.jpg' %}" alt="habitacion" width="200">
+              </td>
+              <td><h3>Habitacion: {{ habitacion.numero_habitacion }}</h3></td>
+            </tr>
+            <tr>
+             <td>{{ habitacion.tipo_habitacion.descripcion }}</td>
+            </tr>
+          </table>
+          <br>
+        {% empty %}
+        <h3>No hay habitaciones</h3>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}

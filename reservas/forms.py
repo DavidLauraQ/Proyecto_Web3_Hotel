@@ -4,6 +4,8 @@ from .models import Cliente, Habitacion, Reserva, TipoHabitacion
 from datetime import date
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+import os
+from django.conf import settings
 
 class RegistroUsuarioForm(UserCreationForm):
     nombre = forms.CharField(max_length=100, required=True)
