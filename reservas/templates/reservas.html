@@ -1,57 +1,62 @@
 {% extends 'base.html' %}
+{% load static %} {# ¡Importante! Cargar estáticos #}
 
 {% block title %}
     Reservas
 {% endblock %}
 
 {% block content %}
-    <h2>Lista de Reservas</h2>
+    <link rel="stylesheet" href="{% static 'css/estiloReservas.css' %}">
 
-    <table>
-        <thead>
-            <tr>
-                <th>Cliente</th>
-                <th>Habitación</th>
-                <th>Fecha Inicio</th>
-                <th>Fecha Fin</th>
-                {% if request.user.is_staff %}
-                    <th>Acciones</th>
-                {% endif %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for reserva in reservas %}
+    <div class="container">
+        <h2>Lista de Reservas</h2>
+
+        <table>
+            <thead>
                 <tr>
-                    <td>{{ reserva.cliente.nombre }}</td>
-                    <td>{{ reserva.habitacion.numero_habitacion }}</td>
-                    <td>{{ reserva.fecha_inicio }}</td>
-                    <td>{{ reserva.fecha_fin }}</td>
+                    <th>Cliente</th>
+                    <th>Habitación</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha Fin</th>
                     {% if request.user.is_staff %}
-                        <td>
-                            <a href="{% url 'editar_reserva' reserva.id_reserva %}">
-                                <button>Editar</button>
-                            </a>
-                            <a href="{% url 'eliminar_reserva' reserva.id_reserva %}">
-                                <button style="background: #c00;">Eliminar</button>
-                            </a>
-                        </td>
+                        <th>Acciones</th>
                     {% endif %}
                 </tr>
-            {% empty %}
-                <tr>
-                    <td colspan="{% if request.user.is_staff %}5{% else %}4{% endif %}">
-                        No hay reservas registradas
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for reserva in reservas %}
+                    <tr>
+                        <td data-label="Cliente">{{ reserva.cliente.nombre }}</td>
+                        <td data-label="Habitación">{{ reserva.habitacion.numero_habitacion }}</td>
+                        <td data-label="Fecha Inicio">{{ reserva.fecha_inicio }}</td>
+                        <td data-label="Fecha Fin">{{ reserva.fecha_fin }}</td>
+                        {% if request.user.is_staff %}
+                            <td data-label="Acciones">
+                                <a href="{% url 'editar_reserva' reserva.id_reserva %}">
+                                    <button>Editar</button>
+                                </a>
+                                <a href="{% url 'eliminar_reserva' reserva.id_reserva %}">
+                                    <button style="background: #c00;">Eliminar</button>
+                                </a>
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="{% if request.user.is_staff %}5{% else %}4{% endif %}">
+                            No hay reservas registradas
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
-    {% if request.user.is_authenticated %}
-    <div style="margin-top: 1rem;">
-        <a href="{% url 'reservar' %}">
-            <button>+ Nueva Reserva</button>
-        </a>
+        {% if request.user.is_authenticated %}
+        <div class="new-booking-button-container">
+            <a href="{% url 'reservar' %}">
+                <button>+ Nueva Reserva</button>
+            </a>
+        </div>
+        {% endif %}
     </div>
-    {% endif %}
 {% endblock %}

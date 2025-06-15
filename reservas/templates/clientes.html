@@ -1,47 +1,52 @@
 {% extends 'base.html' %}
+{% load static %} {# ¡Importante! Cargar estáticos #}
 
 {% block title %}Clientes{% endblock %}
 
 {% block content %}
-<h2>Lista de Clientes</h2>
-<table>
-    <thead>
-        <tr>
-            <th>Nombre</th>
-            <th>Email</th>
-            {% if request.user.is_staff %}
-                <th>Acciones</th>
-            {% endif %}
-        </tr>
-    </thead>
-    <tbody>
-        {% for cliente in clientes %}
-        <tr>
-            <td>{{ cliente.nombre }} {{ cliente.apellido }}</td>
-            <td>{{ cliente.email }}</td>
-            {% if request.user.is_staff %}
-                <td>
-                    <a href="{% url 'editar_cliente' cliente.id_cliente %}">
-                        <button>Editar</button>
-                    </a>
-                    <a href="{% url 'eliminar_cliente' cliente.id_cliente %}">
-                        <button style="background: #c00;">Eliminar</button>
-                    </a>
-                </td>
-            {% endif %}
-        </tr>
-        {% empty %}
-        <tr>
-            <td colspan="{% if request.user.is_staff %}3{% else %}2{% endif %}">No hay clientes registrados</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-{% if request.user.is_staff %}
-<div style="margin-top: 1rem;">
-    <a href="{% url 'crear_cliente' %}">
-        <button>+ Añadir Cliente</button>
-    </a>
-</div>
-{% endif %}
+    <link rel="stylesheet" href="{% static 'css/estiloClientes.css' %}">
+
+    <div class="container">
+        <h2>Lista de Clientes</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    {% if request.user.is_staff %}
+                        <th>Acciones</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for cliente in clientes %}
+                    <tr>
+                        <td data-label="Nombre">{{ cliente.nombre }} {{ cliente.apellido }}</td>
+                        <td data-label="Email">{{ cliente.email }}</td>
+                        {% if request.user.is_staff %}
+                            <td data-label="Acciones">
+                                <a href="{% url 'editar_cliente' cliente.id_cliente %}">
+                                    <button>Editar</button>
+                                </a>
+                                <a href="{% url 'eliminar_cliente' cliente.id_cliente %}">
+                                    <button style="background: #c00;">Eliminar</button>
+                                </a>
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="{% if request.user.is_staff %}3{% else %}2{% endif %}">No hay clientes registrados</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% if request.user.is_staff %}
+        <div class="add-client-button-container">
+            <a href="{% url 'crear_cliente' %}">
+                <button>+ Añadir Cliente</button>
+            </a>
+        </div>
+        {% endif %}
+    </div>
 {% endblock %}

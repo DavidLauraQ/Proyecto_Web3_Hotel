@@ -1,60 +1,64 @@
 {% extends 'base.html' %}
+{% load static %} {# ¡Importante! Cargar estáticos #}
 
 {% block title %}Habitaciones{% endblock %}
 
 {% block content %}
-<h2>Lista de Habitaciones</h2>
-<table>
-    <thead>
-        <tr>
-            <th>Número</th>
-            <th>Tipo</th>
-            <th>Precio/Noche</th>
-            <th>Estado</th>
-            {% if request.user.is_staff %}
-            <th>Acciones</th>
-            {% else %}
-            <th>Descripcion</th>
-            {% endif %}
-        </tr>
-    </thead>
-    <tbody>
-        {% for habitacion in habitaciones %}
-        <tr>
-            <td>{{ habitacion.numero_habitacion }}</td>
-            <td>{{ habitacion.tipo_habitacion.nombre_tipo }}</td>
-            <td>${{ habitacion.tipo_habitacion.precio_noche }}</td>
-            <td>{{ habitacion.get_estado_display }}</td>
-            {% if request.user.is_staff %}
-            <td>
-                <a href="{% url 'editar_habitacion' habitacion.id_habitacion %}"><button>Editar</button></a>
-                <a href="{% url 'eliminar_habitacion' habitacion.id_habitacion %}"><button style="background-color: #c00;">Eliminar</button></a>
-            </td>
-            {% else %}
-            <td>{{ habitacion.tipo_habitacion.descripcion }}</td>
-            {% endif %}
-        </tr>
-        {% empty %}
-        <tr>
-            <td colspan="{% if request.user.is_staff %}5{% else %}4{% endif %}">No hay habitaciones registradas</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+    <link rel="stylesheet" href="{% static 'css/estiloHabitaciones.css' %}">
 
-{% if request.user.is_authenticated and request.user.is_staff %}
-<!-- Temporal los div hasta que el marco lo arregle -->
-<div style="margin-top: 1rem; display: flex; "> <!-- justify-content: space-around -->
-    <div>
-        <a href="{% url 'crear_tipohabitacion' %}">
-            <button>+ Nuevo tipo de habitacion</button>
-        </a>
+    <div class="container">
+        <h2>Lista de Habitaciones</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Número</th>
+                    <th>Tipo</th>
+                    <th>Precio/Noche</th>
+                    <th>Estado</th>
+                    {% if request.user.is_staff %}
+                    <th>Acciones</th>
+                    {% else %}
+                    <th>Descripción</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for habitacion in habitaciones %}
+                <tr>
+                    <td data-label="Número">{{ habitacion.numero_habitacion }}</td>
+                    <td data-label="Tipo">{{ habitacion.tipo_habitacion.nombre_tipo }}</td>
+                    <td data-label="Precio/Noche">${{ habitacion.tipo_habitacion.precio_noche }}</td>
+                    <td data-label="Estado">{{ habitacion.get_estado_display }}</td>
+                    {% if request.user.is_staff %}
+                    <td data-label="Acciones">
+                        <a href="{% url 'editar_habitacion' habitacion.id_habitacion %}"><button>Editar</button></a>
+                        <a href="{% url 'eliminar_habitacion' habitacion.id_habitacion %}"><button style="background-color: #c00;">Eliminar</button></a>
+                    </td>
+                    {% else %}
+                    <td data-label="Descripción">{{ habitacion.tipo_habitacion.descripcion }}</td>
+                    {% endif %}
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="{% if request.user.is_staff %}5{% else %}4{% endif %}">No hay habitaciones registradas</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% if request.user.is_authenticated and request.user.is_staff %}
+        <div class="action-buttons-container">
+            <div>
+                <a href="{% url 'crear_tipohabitacion' %}">
+                    <button>+ Nuevo tipo de habitación</button>
+                </a>
+            </div>
+            <div>
+                <a href="{% url 'crear_habitacion' %}">
+                    <button>+ Nueva Habitación</button>
+                </a>
+            </div>
+        </div>
+        {% endif %}
     </div>
-    <div>
-        <a href="{% url 'crear_habitacion' %}">
-            <button>+ Nueva Habitación</button>
-        </a>
-    </div>
-</div>
-{% endif %}
 {% endblock %}

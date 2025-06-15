@@ -1,0 +1,218 @@
+/* estiloHabitaciones.css */
+
+/* --- General Body and Container Styling --- */
+body {
+    font-family: 'Open Sans', sans-serif; /* Un tipo de letra limpio y moderno */
+    color: #333;
+    line-height: 1.6;
+    background-color: #f4f7f6; /* Un fondo ligeramente grisáceo para suavizar */
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1000px; /* Ancho máximo para el contenido principal */
+    margin: 40px auto; /* Centrar y dar espacio superior/inferior */
+    padding: 25px;
+    background-color: #ffffff; /* Fondo blanco para el contenido */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra suave para profundidad */
+}
+
+/* --- Título de la Página --- */
+h2 {
+    font-family: 'Playfair Display', serif; /* Mantener la elegancia del título */
+    font-size: 2.8em;
+    color: #4A6C62; /* Un verde azulado oscuro para un toque sofisticado */
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e0e0e0; /* Línea sutil bajo el título */
+}
+
+/* --- Estilo de la Tabla --- */
+table {
+    width: 100%;
+    border-collapse: collapse; /* Eliminar el espacio entre celdas */
+    margin-top: 25px;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden; /* Para que los bordes redondeados se apliquen bien */
+}
+
+thead {
+    background-color: #A0522D; /* El mismo marrón cálido del home para coherencia */
+    color: #fff;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd; /* Separador de filas */
+}
+
+th {
+    font-weight: bold;
+    font-size: 1.1em;
+    text-transform: uppercase; /* Mayúsculas para los encabezados */
+    letter-spacing: 0.5px;
+}
+
+/* Estilo para las filas pares para mejorar la legibilidad */
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+    background-color: #f0f0f0; /* Resaltar fila al pasar el ratón */
+    transition: background-color 0.2s ease;
+}
+
+/* --- Estilos específicos de las celdas --- */
+td:nth-child(1) { /* Número de Habitación */
+    font-weight: bold;
+    color: #333;
+}
+
+td:nth-child(3) { /* Precio/Noche */
+    font-weight: bold;
+    color: #4A6C62; /* Color para destacar el precio */
+}
+
+/* Estado de la habitación */
+td:nth-child(4) {
+    font-weight: 600;
+}
+
+td:nth-child(4):contains("Disponible") {
+    color: #28a745; /* Verde para disponible */
+}
+
+td:nth-child(4):contains("Ocupada") {
+    color: #dc3545; /* Rojo para ocupada */
+}
+
+td:nth-child(4):contains("Mantenimiento") {
+    color: #ffc107; /* Amarillo para mantenimiento */
+}
+
+
+/* --- Botones de Acción (Editar/Eliminar) --- */
+button {
+    background-color: #6c757d; /* Gris neutro por defecto */
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-right: 5px; /* Espacio entre botones */
+}
+
+button:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px); /* Efecto ligero al pasar el ratón */
+}
+
+button[style*="background-color: #c00"] { /* Botón de eliminar */
+    background-color: #dc3545 !important; /* Rojo vibrante */
+}
+
+button[style*="background-color: #c00"]:hover {
+    background-color: #c82333 !important;
+}
+
+/* --- Botones de Creación (Nuevo Tipo, Nueva Habitación) --- */
+.action-buttons-container {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center; /* Centrar los botones */
+    gap: 20px; /* Espacio entre los botones */
+    flex-wrap: wrap; /* Permitir que los botones se envuelvan en pantallas pequeñas */
+}
+
+.action-buttons-container button {
+    background-color: #28a745; /* Verde para acciones de "crear" */
+    padding: 12px 20px;
+    font-size: 1em;
+}
+
+.action-buttons-container button:hover {
+    background-color: #218838;
+}
+
+/* --- Mensaje de "No hay habitaciones" --- */
+td[colspan] {
+    text-align: center;
+    font-style: italic;
+    color: #777;
+    padding: 20px;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    .container {
+        margin: 20px;
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 2em;
+    }
+
+    table, thead, tbody, th, td, tr {
+        display: block; /* Apilar elementos de tabla */
+    }
+
+    thead tr {
+        position: absolute;
+        top: -9999px; /* Ocultar el encabezado de la tabla */
+        left: -9999px;
+    }
+
+    tr {
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    td {
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%; /* Espacio para la etiqueta */
+        text-align: right;
+    }
+
+    td:before {
+        content: attr(data-label); /* Usar atributo data-label para la etiqueta */
+        position: absolute;
+        left: 0;
+        width: 45%;
+        padding-left: 15px;
+        font-weight: bold;
+        text-align: left;
+        color: #555;
+    }
+
+    /* Ajustar los data-label para cada columna */
+    td:nth-of-type(1):before { content: "Número:"; }
+    td:nth-of-type(2):before { content: "Tipo:"; }
+    td:nth-of-type(3):before { content: "Precio/Noche:"; }
+    td:nth-of-type(4):before { content: "Estado:"; }
+    td:nth-of-type(5):before { content: "Descripción:"; } /* Para usuarios normales */
+    td:nth-of-type(5):before { content: "Acciones:"; } /* Para staff - necesitarías lógica de Django para aplicar esto dinámicamente si los índices cambian */
+
+    .action-buttons-container {
+        flex-direction: column; /* Apilar botones en móviles */
+        gap: 10px;
+        align-items: center;
+    }
+
+    .action-buttons-container button {
+        width: 100%; /* Botones de ancho completo */
+        max-width: 300px; /* Ancho máximo para no desbordar */
+    }
+}

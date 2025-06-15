@@ -1,0 +1,202 @@
+/* estiloReservas.css */
+
+/* --- General Body and Container Styling --- */
+body {
+    font-family: 'Open Sans', sans-serif; /* Consistente con habitaciones.html */
+    color: #333;
+    line-height: 1.6;
+    background-color: #f4f7f6; /* Fondo suave */
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 25px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Título de la Página --- */
+h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8em;
+    color: #4A6C62; /* Verde azulado oscuro */
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+/* --- Estilo de la Tabla --- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+thead {
+    background-color: #A0522D; /* Marrón cálido del home */
+    color: #fff;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    font-weight: bold;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+    background-color: #f0f0f0;
+    transition: background-color 0.2s ease;
+}
+
+/* --- Estilos específicos de las celdas de Reservas --- */
+td:nth-child(1) { /* Cliente */
+    font-weight: bold;
+    color: #333;
+}
+
+td:nth-child(2) { /* Habitación */
+    font-weight: bold;
+    color: #4A6C62; /* Color para destacar el número de habitación */
+}
+
+td:nth-child(3), /* Fecha Inicio */
+td:nth-child(4) { /* Fecha Fin */
+    font-family: 'Roboto Mono', monospace; /* Una fuente monoespaciada para fechas */
+    color: #666;
+    font-size: 0.95em;
+}
+
+/* --- Botones de Acción (Editar/Eliminar) --- */
+button {
+    background-color: #6c757d; /* Gris neutro por defecto */
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-right: 5px;
+}
+
+button:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+}
+
+button[style*="background: #c00"] { /* Botón de eliminar (ajustado por el 'background' en tu HTML) */
+    background-color: #dc3545 !important; /* Rojo vibrante */
+}
+
+button[style*="background: #c00"]:hover {
+    background-color: #c82333 !important;
+}
+
+/* --- Botón de "Nueva Reserva" --- */
+.new-booking-button-container {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center; /* Centrar el botón */
+}
+
+.new-booking-button-container button {
+    background-color: #28a745; /* Verde para acciones de "crear" */
+    padding: 12px 25px;
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.new-booking-button-container button:hover {
+    background-color: #218838;
+}
+
+/* --- Mensaje de "No hay reservas" --- */
+td[colspan] {
+    text-align: center;
+    font-style: italic;
+    color: #777;
+    padding: 20px;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    .container {
+        margin: 20px;
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 2em;
+    }
+
+    table, thead, tbody, th, td, tr {
+        display: block; /* Apilar elementos de tabla */
+    }
+
+    thead tr {
+        position: absolute;
+        top: -9999px; /* Ocultar el encabezado de la tabla */
+        left: -9999px;
+    }
+
+    tr {
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    td {
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%; /* Espacio para la etiqueta */
+        text-align: right;
+    }
+
+    td:before {
+        content: attr(data-label); /* Usar atributo data-label para la etiqueta */
+        position: absolute;
+        left: 0;
+        width: 45%;
+        padding-left: 15px;
+        font-weight: bold;
+        text-align: left;
+        color: #555;
+    }
+
+    /* Ajustar los data-label para cada columna */
+    td:nth-of-type(1):before { content: "Cliente:"; }
+    td:nth-of-type(2):before { content: "Habitación:"; }
+    td:nth-of-type(3):before { content: "Fecha Inicio:"; }
+    td:nth-of-type(4):before { content: "Fecha Fin:"; }
+    td:nth-of-type(5):before { content: "Acciones:"; } /* Solo para staff */
+
+    .new-booking-button-container {
+        padding: 0 15px; /* Ajustar padding para móviles */
+    }
+
+    .new-booking-button-container button {
+        width: 100%;
+        max-width: 300px;
+    }
+}
