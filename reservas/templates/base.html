@@ -1,24 +1,25 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>{% block title %}Sistema de Reservas{% endblock %}</title>
-
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
 </head>
 <body>
-    <nav>
-        {% if request.user.is_authenticated %}
-            {% if request.user.is_staff %}
-                <a href="{% url 'clientes' %}">Clientes</a>
+    <nav class="navbar">
+        <div class="navbar-container">
+            {% if request.user.is_authenticated %}
+                {% if request.user.is_staff %}
+                    <a href="{% url 'clientes' %}">Clientes</a>
+                {% endif %}
+                <a href="{% url 'home' %}">Inicio</a>
+                <a href="{% url 'habitaciones' %}">Habitaciones</a>
+                <a href="{% url 'reservas' %}">Reservas</a>
+                <a href="{% url 'logout' %}">Salir</a>
             {% endif %}
-            <a href="{% url 'home' %}">Inicio</a>
-            <a href="{% url 'habitaciones' %}">Habitaciones</a>
-            <a href="{% url 'reservas' %}">Reservas</a>
-            <a href="{% url 'logout' %}">Salir</a>
-        {% else %}
-        {% endif %}
+        </div>
     </nav>
 
-    {# Bloque global para mensajes #}
     {% if messages %}
         <ul class="messages">
             {% for message in messages %}
