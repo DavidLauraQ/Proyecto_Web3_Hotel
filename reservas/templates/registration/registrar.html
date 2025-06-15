@@ -36,4 +36,39 @@
     </div>
   </form>
 </div>
+<!-- VALIDACIÓN EN TIEMPO REAL DE CONTRASEÑA -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const passwordInput = document.querySelector('#id_password1');
+    const feedback = document.createElement('div');
+    feedback.style.color = 'red';
+    feedback.style.fontSize = '0.9em';
+    passwordInput.parentNode.insertBefore(feedback, passwordInput.nextSibling);
+
+    passwordInput.addEventListener('input', function () {
+      const password = passwordInput.value;
+      let message = '';
+
+      if (password.length < 8) {
+        message = 'La contraseña debe tener al menos 8 caracteres.';
+      } else if (!/[A-Z]/.test(password)) {
+        message = 'Debe incluir al menos una letra mayúscula.';
+      } else if (!/[a-z]/.test(password)) {
+        message = 'Debe incluir al menos una letra minúscula.';
+      } else if (!/[0-9]/.test(password)) {
+        message = 'Debe incluir al menos un número.';
+      } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+        message = 'Debe incluir al menos un carácter especial.';
+      } else {
+        message = 'Contraseña segura ✅';
+        feedback.style.color = 'green';
+      }
+
+      feedback.textContent = message;
+      if (message !== 'Contraseña segura ✅') {
+        feedback.style.color = 'red';
+      }
+    });
+  });
+</script>
 {% endblock %}
