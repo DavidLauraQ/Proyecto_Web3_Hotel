@@ -1,14 +1,37 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
 
-<br>
-<h2>INICIAR SESION</h2>
-<form action="" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Ingresar</button>
-</form>
+<!-- Asegúrate de que tu base.html tenga el link al CSS y Boxicons, o inclúyelos aquí si no están -->
+{% comment %} <link rel="stylesheet" href="{% static 'style.css' %}">
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> {% endcomment %}
 
-{% endblock  %}
+<div class="wrapper">
+    <form method="post">
+        {% csrf_token %}
+        <h1>LOGIN</h1>
+
+        <div class="input-box">
+            {{ form.username }}
+            <i class='bx bxs-user'></i>
+        </div>
+
+        <div class="input-box">
+            {{ form.password }}
+            <i class='bx bxs-lock'></i>
+        </div>
+
+        <div class="remember-forgot">
+            <label><input type="checkbox"> Recuérdame</label>
+            <a href="#">¿Olvidaste tu contraseña?</a>
+        </div>
+
+        <button type="submit" class="btn">Ingresar</button>
+
+        <div class="register-link">
+            <p>¿No tienes una cuenta? <a href="{% url 'registrar' %}">Registrar</a></p>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

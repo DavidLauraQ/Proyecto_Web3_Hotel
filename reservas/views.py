@@ -34,7 +34,7 @@ def registrar(request):
 
 def salir(request):
     logout(request)
-    return redirect('home')
+    return redirect('home1')
 
 def home(request):
     return render(request, 'home.html')

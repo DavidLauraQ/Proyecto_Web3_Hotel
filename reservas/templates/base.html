@@ -6,17 +6,15 @@
 </head>
 <body>
     <nav>
-        <a href="{% url 'home' %}">Inicio</a>
         {% if request.user.is_authenticated %}
             {% if request.user.is_staff %}
                 <a href="{% url 'clientes' %}">Clientes</a>
             {% endif %}
+            <a href="{% url 'home' %}">Inicio</a>
             <a href="{% url 'habitaciones' %}">Habitaciones</a>
             <a href="{% url 'reservas' %}">Reservas</a>
             <a href="{% url 'logout' %}">Salir</a>
         {% else %}
-            <a href="{% url 'login' %}">Ingresar</a>
-            <a href="{% url 'registrar' %}">Registrarse</a>
         {% endif %}
     </nav>
 
