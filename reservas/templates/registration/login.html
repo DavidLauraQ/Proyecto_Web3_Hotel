@@ -1,11 +1,6 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-
-<!-- Asegúrate de que tu base.html tenga el link al CSS y Boxicons, o inclúyelos aquí si no están -->
-{% comment %} <link rel="stylesheet" href="{% static 'style.css' %}">
-<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> {% endcomment %}
-
 <div class="wrapper">
     <form method="post">
         {% csrf_token %}
@@ -33,5 +28,4 @@
         </div>
     </form>
 </div>
-
 {% endblock %}

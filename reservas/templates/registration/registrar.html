@@ -1,22 +1,39 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
+<div class="register-wrapper">
   <h2>Registro de Usuario</h2>
   <form method="post">
     {% csrf_token %}
     {{ form.non_field_errors }}
 
-    {{ form.username.label_tag }} {{ form.username }}<br>
-    {{ form.email.label_tag }} {{ form.email }}<br>
-    {{ form.nombre.label_tag }} {{ form.nombre }}<br>
-    {{ form.apellido.label_tag }} {{ form.apellido }}<br>
-    {{ form.telefono.label_tag }} {{ form.telefono }}<br>
-    {{ form.password1.label_tag }} {{ form.password1 }}<br>
-    {{ form.password2.label_tag }} {{ form.password2 }}<br>
+    <label>{{ form.username.label }}</label>
+    {{ form.username }}
 
-    <button type="submit">Registrarse</button>
-    <button onclick="window.location.href='{% url 'login' %}'">
-    Iniciar Sesión
-</button>
+    <label>{{ form.email.label }}</label>
+    {{ form.email }}
+
+    <label>{{ form.nombre.label }}</label>
+    {{ form.nombre }}
+
+    <label>{{ form.apellido.label }}</label>
+    {{ form.apellido }}
+
+    <label>{{ form.telefono.label }}</label>
+    {{ form.telefono }}
+
+    <label>{{ form.password1.label }}</label>
+    {{ form.password1 }}
+
+    <label>{{ form.password2.label }}</label>
+    {{ form.password2 }}
+
+    <div class="register-buttons">
+      <button type="submit">Registrarse</button>
+      <button type="button" onclick="window.location.href='{% url 'login' %}'">
+        Iniciar Sesión
+      </button>
+    </div>
   </form>
+</div>
 {% endblock %}

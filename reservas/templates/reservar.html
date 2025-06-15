@@ -1,47 +1,59 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}Nueva Reserva{% endblock %}
 
 {% block content %}
-<h2 class="mb-3">{% if reserva %}Editar{% else %}Nueva{% endif %} Reserva</h2>
+<div class="reserva-container">
+    
+    <!-- Columna izquierda: formulario -->
+    <div class="reserva-formulario">
+        <h2>{% if reserva %}Editar{% else %}Nueva{% endif %} Reserva</h2>
 
-{# Mostrar mensajes del sistema (éxito, error, etc.) #}
-{% if messages %}
-  <ul class="messages">
-    {% for message in messages %}
-      <li class="{{ message.tags }}">{{ message }}</li>
-    {% endfor %}
-  </ul>
-{% endif %}
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
 
-<form method="post">
-    {% csrf_token %}
-    
-    <div class="form-group">
-        <label for="id_cliente">Cliente:</label>
-        {{ form.cliente.errors }}
-        {{ form.cliente }}
-    </div>
-    
-    <div class="form-group">
-        <label for="id_habitacion">Habitación:</label>
-        {{ form.habitacion.errors }}
-        {{ form.habitacion }}
-    </div>
-    
-    <div class="form-group">
-        <label for="id_fecha_inicio">Fecha de Entrada:</label>
-        {{ form.fecha_inicio.errors }}
-        {{ form.fecha_inicio }}
-    </div>
-    
-    <div class="form-group">
-        <label for="id_fecha_fin">Fecha de Salida:</label>
-        {{ form.fecha_fin.errors }}
-        {{ form.fecha_fin }}
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="id_cliente">Cliente:</label>
+                {{ form.cliente.errors }}
+                {{ form.cliente }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_habitacion">Habitación:</label>
+                {{ form.habitacion.errors }}
+                {{ form.habitacion }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_fecha_inicio">Fecha de Entrada:</label>
+                {{ form.fecha_inicio.errors }}
+                {{ form.fecha_inicio }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_fecha_fin">Fecha de Salida:</label>
+                {{ form.fecha_fin.errors }}
+                {{ form.fecha_fin }}
+            </div>
+
+            <button type="submit" class="btn btn-success">Guardar Reserva</button>
+            <a href="{% url 'reservas' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
     </div>
 
-    <button type="submit" class="btn btn-success">Guardar Reserva</button>
-    <a href="{% url 'reservas' %}" class="btn btn-secondary">Cancelar</a>
-</form>
+    <!-- Columna derecha: imagen + texto -->
+    <div class="reserva-info">
+        <img src="{% static 'img/fcpn.jpg' %}" alt="Hotel" class="reserva-imagen">
+        <h3>Tu estancia perfecta</h3>
+        <p>Reserva con nosotros y disfruta de una experiencia inolvidable en nuestras habitaciones cómodas y elegantes.</p>
+    </div>
+</div>
 {% endblock %}
