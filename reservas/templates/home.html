@@ -1,12 +1,63 @@
 {% extends 'base.html' %}
-{% block content %}
-    <h2>Inicio</h2>
-    
-    {% if user.is_authenticated %}
-        <h3>{{user.username}} BIENVENIDO!!!</h3>
-    {% else %}
-        BIENVENIDO , ESTE CAMPO ES PARA Habitaciones
-    {% endif %}
-        
+{% load static %} {# This line is important to load static files #}
 
-{% endblock  %}
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/estiloHome.css' %}">
+
+    <div class="hero-section">
+        <h2>Bienvenido a Nuestro Hotel de Ensueño</h2>
+        <p>Descubre la experiencia de lujo y confort que te espera.</p>
+        <a href="{% url 'habitaciones' %}" class="btn-primary">Ver Habitaciones Disponibles</a> {# Replace '#' with your rooms URL #}
+    </div>
+
+    <div class="container">
+        {% if user.is_authenticated %}
+            <h3 class="welcome-message">{{ user.username }} BIENVENIDO!!!</h3>
+        {% else %}
+            <p class="welcome-message">BIENVENIDO, ESTE CAMPO ES PARA Habitaciones</p>
+        {% endif %}
+
+        <div class="content-section">
+            <h2>Explora Nuestras Habitaciones</h2>
+            <p>Ofrecemos una amplia variedad de habitaciones diseñadas para tu máximo confort y relajación, desde acogedoras individuales hasta lujosas suites con vistas panorámicas. Cada una equipada con las mejores comodidades para hacer tu estancia inolvidable.</p>
+
+            <div class="room-showcase">
+                
+                <div class="room-card">
+                    <img src="{% static 'img/individual2.jpg' %}" alt="Habitación Estándar">
+                    <div class="room-card-content">
+                        <h4>Habitación Individual</h4>
+                        <p>Perfecta para viajeros individuales o parejas, equipada con todas las comodidades esenciales.</p>
+                        <div class="price">$30/noche</div>
+                        <a href="{% url 'reservar' %}" class="btn-secondary">Reservar Ahora</a>
+                    </div>
+                </div>
+
+                <div class="room-card">
+                    <img src="{% static 'img/suite2.jpg' %}" alt="Suite de Lujo">
+                    <div class="room-card-content">
+                        <h4>Suite Ejecutiva</h4>
+                        <p>Espaciosa y elegante, ideal para estancias de negocios o escapadas románticas.</p>
+                        <div class="price">$120/noche</div>
+                        <a href="{% url 'reservar' %}" class="btn-secondary">Reservar Ahora</a>
+                    </div>
+                </div>
+
+                {# Example Room Card 3 #}
+                <div class="room-card">
+                    <img src="{% static 'img/familliar1.jpg' %}" alt="Habitación Familiar">
+                    <div class="room-card-content">
+                        <h4>Habitación Familiar</h4>
+                        <p>Con espacio para toda la familia, garantiza una estancia cómoda y divertida.</p>
+                        <div class="price">$90/noche</div>
+                        <a href="{% url 'reservar' %}" class="btn-secondary">Reservar Ahora</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="home-footer">
+        <p>&copy; 2025 Tu Hotel. Todos los derechos reservados.</p>
+    </footer>
+{% endblock %}
