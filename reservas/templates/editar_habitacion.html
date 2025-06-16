@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}Editar Habitación{% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/crudHabiED.css' %}">
 <h2>Editar Habitación</h2>
 <form method="post">
     {% csrf_token %}

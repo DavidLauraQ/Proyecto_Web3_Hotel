@@ -1,0 +1,72 @@
+/* Estilo general del contenido */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f7f7f7;
+  margin: 0;
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+  color: #b71c1c;
+  margin-bottom: 30px;
+}
+
+/* Información de la reserva */
+p {
+  font-size: 16px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+/* Contenedor del formulario */
+form {
+  max-width: 500px;
+  margin: 30px auto;
+  background-color: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+/* Pregunta de confirmación */
+form p:first-of-type {
+  font-weight: bold;
+  font-size: 17px;
+  margin-bottom: 20px;
+}
+
+/* Botón eliminar */
+.btn-eliminar {
+  background-color: #d32f2f;
+  color: #fff;
+  border: none;
+  padding: 12px 25px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-right: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-eliminar:hover {
+  background-color: #9a2323;
+}
+
+/* Botón cancelar */
+form a {
+  display: inline-block;
+  text-decoration: none;
+  background-color: #777;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+form a:hover {
+  background-color: #555;
+}

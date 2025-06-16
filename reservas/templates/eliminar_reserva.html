@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Eliminar Reserva{% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/crudReE.css' %}">
+
     <h2>¿Estás seguro de que deseas eliminar esta reserva?</h2>
     <p>Cliente: {{ reserva.cliente.nombre }} {{ reserva.cliente.apellido }}</p>
     <p>Habitación: {{ reserva.habitacion.numero_habitacion }}</p>
@@ -9,8 +12,9 @@
     <p>Fecha de fin: {{ reserva.fecha_fin }}</p>
 
     <form method="post">
-        {% csrf_token %}
-        <button type="submit" style="background: #c00;">Eliminar</button>
-        <a href="{% url 'reservas' %}"><button type="button">Cancelar</button></a>
-    </form>
+    {% csrf_token %}
+    <p>¿Seguro que deseas eliminar esta reserva?</p>
+    <button type="submit" class="btn-eliminar">Eliminar Reserva</button>
+    <a href="{% url 'reservas' %}">Cancelar</a>
+</form>
 {% endblock %}

@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}Nueva Habitación{% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/crudHabi.css' %}">
 <h2>Nueva Habitación</h2>
 
 <form method="post">

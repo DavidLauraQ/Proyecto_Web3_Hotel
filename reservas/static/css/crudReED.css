@@ -1,0 +1,128 @@
+/* Contenedor general para el formulario */
+form {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 25px 30px;
+  background-color: #fafafa;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Grupos de campos (divs dentro del form) */
+form > div {
+  margin-bottom: 18px;
+}
+
+/* Etiquetas */
+form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #222;
+}
+
+/* Inputs, selects y campos de texto */
+form input[type="text"],
+form input[type="date"],
+form select {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 16px;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.3s ease;
+}
+
+form input[type="text"]:focus,
+form input[type="date"]:focus,
+form select:focus {
+  border-color: #2e8b57;
+  outline: none;
+}
+
+/* Mensajes de error debajo de cada campo */
+form div > div {
+  color: #d32f2f;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+/* Texto pequeño (ejemplo "Actual: ...") */
+form small {
+  font-size: 13px;
+  color: #555;
+  display: block;
+  margin-top: 4px;
+}
+
+/* Contenedor de botones (último div dentro del form) */
+form > div:last-child {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Botón guardar (submit) */
+form button[type="submit"]:not(.btn-eliminar) {
+  background-color: #2e8b57;
+  color: white;
+  border: none;
+  padding: 13px 26px;
+  font-size: 17px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex: 1 1 auto;
+  min-width: 140px;
+}
+
+form button[type="submit"]:not(.btn-eliminar):hover {
+  background-color: #246c45;
+}
+
+/* Botón eliminar */
+form button.btn-eliminar {
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  padding: 13px 26px;
+  font-size: 17px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex: 1 1 auto;
+  min-width: 140px;
+}
+
+form button.btn-eliminar:hover {
+  background-color: #9a2323;
+}
+
+/* Botón cancelar (enlace) */
+form a {
+  text-align: center;
+  background-color: #777;
+  color: white;
+  padding: 13px 26px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  flex: 1 1 auto;
+  min-width: 140px;
+}
+
+form a:hover {
+  background-color: #555;
+}
+
+/* Texto confirmación para eliminar */
+form > p:first-of-type {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}

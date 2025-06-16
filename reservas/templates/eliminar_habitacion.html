@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}Eliminar Habitación{% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/crudHabiED.css' %}">
 <h2>¿Deseas eliminar la habitación {{ habitacion.numero_habitacion }}?</h2>
 <form method="post">
     {% csrf_token %}

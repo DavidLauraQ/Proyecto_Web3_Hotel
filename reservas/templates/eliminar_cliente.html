@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}Eliminar Cliente{% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/crudCliED.css' %}">
 <h2>Eliminar Cliente</h2>
 
 <p>¿Estás seguro que quieres eliminar al cliente: <strong>{{ cliente.nombre }} {{ cliente.apellido }}</strong>?</p>

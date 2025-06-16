@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}Añadir Cliente{% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/crudCliC.css' %}">
 <h2>Añadir Cliente</h2>
 
 <form method="post" novalidate>
