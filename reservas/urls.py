@@ -26,7 +26,10 @@ urlpatterns = [
     path('reservar/', views.crear_reserva, name='reservar'),
     path('reservas/eliminar/<int:pk>/', views.eliminar_reserva, name='eliminar_reserva'),
     path('reservas/editar/<int:pk>/', views.editar_reserva, name='editar_reserva'),
-
+    
+    #Descargar Reservas en pdf y excel
+    path('reporte-reservas/pdf/', views.reporte_reservas_pdf, name='reporte_reservas_pdf'),
+    path('reporte-reservas/excel/', views.reporte_reservas_excel, name='reporte_reservas_excel'),
     # Autenticación
     path('accounts/login/', auth_views.LoginView.as_view(), name='login'),
     path('accounts/logout/', views.salir, name='logout'),

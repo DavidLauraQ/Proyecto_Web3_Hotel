@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static %} {# ¡Importante! Cargar estáticos #}
+{% load static %}
 
 {% block title %}
     Reservas
@@ -10,7 +10,10 @@
 
     <div class="container">
         <h2>Lista de Reservas</h2>
-
+        <div class="export-buttons" style="margin-bottom: 20px;">
+            <a href="{% url 'reporte_reservas_pdf' %}" class="btn-pdf">📄 Descargar PDF</a>
+            <a href="{% url 'reporte_reservas_excel' %}" class="btn-excel">📊 Descargar Excel</a>
+        </div>
         <table>
             <thead>
                 <tr>

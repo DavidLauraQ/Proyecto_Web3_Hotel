@@ -7,6 +7,10 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, login
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.http import HttpResponse
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
+from openpyxl import Workbook
 
 def es_admin(user):
     return user.is_staff
@@ -198,3 +202,58 @@ def eliminar_reserva(request, pk):
         reserva.delete()
         return redirect('reservas')
     return render(request, 'eliminar_reserva.html', {'reserva': reserva})
+
+# DESCARGAR RESERVAS
+
+# PDF
+def reporte_reservas_pdf(request):
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="reservas.pdf"'
+
+    p = canvas.Canvas(response, pagesize=letter)
+    width, height = letter
+
+    p.setFont("Helvetica-Bold", 16)
+    p.drawString(200, height - 50, "Lista de Reservas")
+
+    p.setFont("Helvetica", 11)
+    y = height - 80
+
+    reservas = Reserva.objects.all()
+
+    for reserva in reservas:
+        texto = f"{reserva.cliente.nombre} {reserva.cliente.apellido} | Habitación: {reserva.habitacion.numero_habitacion} | {reserva.fecha_inicio} → {reserva.fecha_fin}"
+        p.drawString(50, y, texto)
+        y -= 20
+        if y < 50:  # Salto de página
+            p.showPage()
+            y = height - 50
+
+    p.save()
+    return response
+
+
+# EXCEL
+def reporte_reservas_excel(request):
+    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = 'attachment; filename="reservas.xlsx"'
+
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Reservas"
+
+    # Encabezados
+    ws.append(["Cliente", "Habitación", "Fecha Inicio", "Fecha Fin"])
+
+    reservas = Reserva.objects.all()
+
+    for r in reservas:
+        ws.append([
+            f"{r.cliente.nombre} {r.cliente.apellido}",
+            r.habitacion.numero_habitacion,
+            str(r.fecha_inicio),
+            str(r.fecha_fin)
+        ])
+
+    wb.save(response)
+    return response
