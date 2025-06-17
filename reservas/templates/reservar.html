@@ -16,11 +16,9 @@
       currentIndex = (currentIndex + 1) % items.length;
       track.style.transform = `translateX(-${currentIndex * 100}%)`;
     }
-    
-    // Movimiento automático cada 3.5 segundos con transición suave
+
     setInterval(moveCarousel, 3500);
     
-    // Pausa al interactuar (opcional)
     track.addEventListener('mouseenter', () => clearInterval(interval));
     track.addEventListener('mouseleave', () => interval = setInterval(moveCarousel, 3500));
   });

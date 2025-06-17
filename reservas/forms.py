@@ -20,10 +20,8 @@ class RegistroUsuarioForm(UserCreationForm):
     def save(self, commit=True):
         user = super().save(commit=False)
         user.email = self.cleaned_data['email']
-        # Aquí no existen nombre, apellido, telefono en User, debes manejarlo aparte
         if commit:
             user.save()
-            # Aquí puedes guardar los datos adicionales en un perfil extendido
         return user
 
 

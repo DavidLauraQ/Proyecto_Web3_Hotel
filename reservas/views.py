@@ -35,7 +35,6 @@ def registrar(request):
     return render(request, 'registration/registrar.html', {'form': form})
 
 # LOGIN / LOGOUT
-
 def salir(request):
     logout(request)
     return redirect('home1')
@@ -43,7 +42,7 @@ def salir(request):
 def home(request):
     return render(request, 'home.html')
 
-# MODELOS (público o proteger si lo deseas)
+# MODELOS
 def inicio(request):
     return render(request, 'inicio.html')
 
@@ -65,7 +64,6 @@ def crear_cliente(request):
         form = ClienteForm()
     return render(request, 'crear_cliente.html', {'form': form})
 
-
 @login_required
 @user_passes_test(es_admin)
 def editar_cliente(request, pk):
@@ -78,6 +76,7 @@ def editar_cliente(request, pk):
     else:
         form = ClienteForm(instance=cliente)
     return render(request, 'editar_cliente.html', {'form': form, 'cliente': cliente})
+
 @login_required
 @user_passes_test(es_admin)
 def eliminar_cliente(request, pk):
@@ -87,7 +86,7 @@ def eliminar_cliente(request, pk):
         return redirect('clientes')
     return render(request, 'eliminar_cliente.html', {'cliente': cliente})
 
-# TIPO HABITACIONES
+# TIPO DE HABITACIONES
 @login_required
 @user_passes_test(es_admin)
 def crear_tipohabitacion(request):
@@ -132,6 +131,7 @@ def editar_habitacion(request, pk):
     else:
         form = HabitacionForm(instance=habitacion)
     return render(request, 'editar_habitacion.html', {'form': form, 'habitacion': habitacion})
+
 @login_required
 @user_passes_test(es_admin)
 def eliminar_habitacion(request, pk):
@@ -242,7 +242,6 @@ def reporte_reservas_excel(request):
     ws = wb.active
     ws.title = "Reservas"
 
-    # Encabezados
     ws.append(["Cliente", "Habitación", "Fecha Inicio", "Fecha Fin"])
 
     reservas = Reserva.objects.all()

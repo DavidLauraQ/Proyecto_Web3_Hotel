@@ -18,7 +18,8 @@ urlpatterns = [
     path('habitaciones/nueva/', views.crear_habitacion, name='crear_habitacion'),
     path('habitaciones/editar/<int:pk>/', views.editar_habitacion, name='editar_habitacion'),
     path('habitaciones/eliminar/<int:pk>/', views.eliminar_habitacion, name='eliminar_habitacion'),
-    #
+
+    # Tipo de habitaciones
     path('habitaciones/nuevotipo/', views.crear_tipohabitacion, name='crear_tipohabitacion'),
 
     # Reservas
@@ -30,6 +31,7 @@ urlpatterns = [
     #Descargar Reservas en pdf y excel
     path('reporte-reservas/pdf/', views.reporte_reservas_pdf, name='reporte_reservas_pdf'),
     path('reporte-reservas/excel/', views.reporte_reservas_excel, name='reporte_reservas_excel'),
+    
     # Autenticación
     path('accounts/login/', auth_views.LoginView.as_view(), name='login'),
     path('accounts/logout/', views.salir, name='logout'),
